@@ -1,56 +1,63 @@
-#DIRECTORIES
-SRC_DIR = src
-OBJ_DIR = obj
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/16 16:02:38 by wscherre          #+#    #+#              #
+#    Updated: 2025/02/24 15:50:55 by kimnguye         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-#FILES .c
-LIBFT = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-		ft_strlen.c ft_strlcpy.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
-		ft_strncmp.c ft_strnstr.c ft_memset.c ft_memcpy.c ft_memmove.c \
-		ft_memchr.c ft_memcmp.c ft_bzero.c ft_toupper.c ft_tolower.c \
-		ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
-		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
-		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-		ft_atoi_base.c ft_concat.c ft_isnumericlli.c ft_print_split.c
+SRCS	=	ft_isalpha.c ft_isdigit.c ft_isalnum.c \
+			ft_isascii.c ft_isprint.c ft_strlen.c \
+			ft_memset.c ft_bzero.c ft_memcpy.c \
+			ft_memmove.c ft_strlcpy.c ft_strlcat.c \
+			ft_toupper.c ft_tolower.c ft_strchr.c \
+			ft_strrchr.c ft_strncmp.c ft_memchr.c \
+			ft_memcmp.c ft_strnstr.c ft_calloc.c \
+			ft_strdup.c ft_atoi.c ft_substr.c \
+			ft_strjoin.c ft_strmapi.c ft_strtrim.c \
+			ft_itoa.c ft_striteri.c ft_putchar_fd.c \
+			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+			ft_split.c ft_atol.c ft_free_double_tab.c \
+			ft_printf.c ft_print_c.c ft_print_di.c \
+			ft_print_formatted.c ft_print_p.c ft_print_s.c \
+			ft_print_u.c ft_print_x.c \
+			ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+			ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
+			ft_lstmap.c ft_lstnew.c ft_lstsize.c \
+			ft_gnl.c ft_strcmp.c \
+			ft_strncpy.c ft_strcpy.c\
+			ft_strndup.c \
 
-LST = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
-		ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+OBJS    =   $(SRCS:%.c=obj/%.o)
 
-GNL = get_next_line.c get_next_line_utils.c
+CC	=	cc
 
-PRINTF = ft_printf.c ft_printf_c.c ft_printf_d.c ft_printf_i.c ft_printf_p.c \
-		ft_printf_s.c ft_printf_u.c ft_printf_x.c ft_printf_X.c ft_put_lld_base.c \
-		ft_pow.c
+RM	=	rm -f
 
-SRCS = $(addprefix $(SRC_DIR)/, $(LIBFT)) $(addprefix $(SRC_DIR)/, $(LST)) \
-		$(addprefix $(SRC_DIR)/, $(GNL)) $(addprefix $(SRC_DIR)/, $(PRINTF))
+CFLAGS	=	-Wall -Wextra -Werror -I.
 
-#TARGETS
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-LIBFT_A = libft.a
+NAME	=	libft.a
 
-#COMPILATION COMMAND
-CC = cc 
-#-Wall -Wextra -Werror
+all:		$(NAME)
 
-#RULES
-all: $(LIBFT_A)
+$(NAME):	$(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "\033[1;32m""🎉 compilation of $(NAME): ""SUCCESS !🎉""\033[0m"
 clean:
-	@rm -rf $(OBJ_DIR)
-fclean: clean
-	@rm -rf $(LIBFT_A) $(OBJ_DIR)
-	@echo "removing libft.a"
-re: fclean all
+	@$(RM) $(OBJS)
+	@rm -rf obj
 
-#archive several files in one archive file
-$(LIBFT_A): $(OBJS)
-	@ar rcs $(LIBFT_A) $(OBJS)
-	@echo "creating libft.a"
+fclean:		clean
+	$(RM) $(NAME)
 
-# $@ : target
-# $< : dependances
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+re:		fclean all
+
+obj/%.o : %.c | obj
 	@$(CC) -c $< -o $@
 
-.PHONY: clean fclean re all bonus
-
+obj:
+	@mkdir -p obj
