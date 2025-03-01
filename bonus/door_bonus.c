@@ -6,11 +6,12 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 11:40:31 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:42:24 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
 void	open_door(char **map, t_player player)
 {
 	float	x;
@@ -77,7 +78,7 @@ int	is_door_closed(char **map, float x, float y)
 /*return 0 if not door
 return 1 if door is closed
 return 2 if door is open*/
-int	is_door_forward(char **map,  t_player player)
+int	is_door_forward(char **map, t_player player)
 {
 	float	x;
 	float	y;
@@ -103,8 +104,8 @@ void	init_door(t_cub *cub)
 
 	img = &cub->door;
 	img->data = mlx_xpm_file_to_image(cub->mlx,
-		"./textures/door2.xpm", &img->width,	&img->height);
-		if (!img->data)
+			"./textures/door2.xpm", &img->width, &img->height);
+	if (!img->data)
 		exit_error(cub, "Failed XPM to image");
 	img->addr = mlx_get_data_addr(img->data, &img->bpp, &img->size_line,
 			&img->endian);

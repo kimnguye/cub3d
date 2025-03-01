@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:52 by a                 #+#    #+#             */
-/*   Updated: 2025/02/25 12:09:20 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:48:11 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,33 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+void	exit_msg(char *msg)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
+	exit(1);
+}
+
 void	check_arg(int argc, char **argv)
 {
 	int		n;
 	char	buffer[128];
 	int		fd;
+
 	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nIncorrect number of arguments\n", 2);
-		exit(1);
-	}
+		exit_msg("Incorrect number of arguments\n");
 	n = ft_strlen(argv[1]);
 	if (ft_strncmp(".cub", &argv[1][n - 4], 4))
-	{
-		ft_putstr_fd("Error\nWrong file format: a .cub is expected!\n", 2);
-		exit(1);
-	}
+		exit_msg("Wrong file format: a .cub is expected!\n");
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		exit_msg("Can't open file\n");
+	}
 	if (read(fd, buffer, 128) == -1 && errno == EISDIR)
 	{
-		ft_putstr_fd("Error\nCan't read a directory\n", 2);
 		close(fd);
-		exit(1);
+		exit_msg("Can't read a directory\n");
 	}
 	close(fd);
 }
-

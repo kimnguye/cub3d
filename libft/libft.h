@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: a <a@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:02:51 by wscherre          #+#    #+#             */
-/*   Updated: 2025/02/07 17:50:56 by a                ###   ########.fr       */
+/*   Updated: 2025/02/27 10:57:56 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+int					islli(const char *str);
+int					isnumeric(const char *str);
+int					isnumericlli(const char *str);
 int					ft_atoi(const char *nptr);
 long				ft_atol(const char *nptr);
 void				ft_bzero(void *s, size_t n);

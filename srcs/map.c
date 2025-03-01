@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: a <a@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:19:24 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 09:37:15 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:56:34 by a                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,9 @@ void	draw_map(t_cub *cub)
 		while (cub->map[i][j])
 		{
 			if (cub->map[i][j] == '1')
-			{
 				draw_square(cub, (j * BLOCK - x0), (i * BLOCK - y0), BLUE);
-			}
 			j++;
 		}
 		i++;
 	}
 }
-
-	// printf("player.x = %f, player.y = %f;\n", cub->player.x, cub->player.y);
-	// ft_printf("x0 = %i, y0 = %i;\n", x0, y0);
-	// printf("corr: player.x = %f / %i, player.y = %f / %i;\n",
-	// 	cub->player.x - x0, MAP_WIDTH, cub->player.y - y0, MAP_HEIGHT);

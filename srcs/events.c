@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: a <a@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 15:59:18 by a                 #+#    #+#             */
-/*   Updated: 2025/02/25 09:20:24 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:52:06 by a                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	key_press(int key, t_cub *cub)
 		cub->tex_show = true;
 	else if (key == T && cub->tex_show)
 		cub->tex_show = false;
-	else
-		ft_printf("key %i has been pressed\n", key);
 	return (0);
 }
 

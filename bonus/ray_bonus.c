@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:33 by a                 #+#    #+#             */
-/*   Updated: 2025/02/25 11:41:43 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:44:09 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,3 @@ void	draw_wall(t_cub *cub, t_img *texture, int x)
 		start_y++;
 	}
 }
-

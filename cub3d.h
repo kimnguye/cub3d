@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:25 by a                 #+#    #+#             */
-/*   Updated: 2025/02/25 12:06:21 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:02:34 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "cub3d_def.h"
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
+# include <errno.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-# include <errno.h>
 
 typedef struct s_player
 {
@@ -56,6 +56,8 @@ typedef struct s_color
 
 typedef struct s_cub
 {
+	char		*line;
+	int			fd;
 	int			i;
 	int			j;
 	bool		map_show;
@@ -97,8 +99,11 @@ void			check_elements(t_cub *cub);
 void			handle_colors(t_cub *cub, t_color *rgb, char *line);
 void			handle_map(t_cub *cub);
 void			save_map(t_cub *cub, char *file, char *line, int n);
+void			init_map(t_cub *cub, char *file, int n);
+void			add_map_line(t_cub *cub, char *line);
+void			init_max(t_cub *cub, int fd, int n);
 
-//EVENTS
+// EVENTS
 int				key_press(int keycode, t_cub *cub);
 int				key_release(int keycode, t_player *player);
 
@@ -132,7 +137,7 @@ int				is_in(char c, char *str);
 int				line_is_empty(t_cub *cub, char *line);
 int				max(int a, int b);
 
-//PRINT
+// PRINT
 void			print_cub(t_cub *cub);
 void			print_mlx(t_cub *cub);
 void			show_texture(t_cub *cub);
@@ -140,9 +145,9 @@ void			show_texture(t_cub *cub);
 // background
 void			background(t_cub *cub);
 
-//bonus
+// bonus
 void			init_door(t_cub *cub);
-int				is_door_forward(char **map,  t_player player);
+int				is_door_forward(char **map, t_player player);
 void			open_door(char **map, t_player player);
 int				is_door_closed(char **map, float x, float y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 02:15:48 by a                 #+#    #+#             */
-/*   Updated: 2025/02/25 10:47:53 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:13:12 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,37 +34,36 @@ as long as it respects the rules of the map.
 
 void	parsing(t_cub *cub, char *file)
 {
-	int		fd;
-	char	*line;
 	int		n;
 
 	n = 0;
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	cub->fd = open(file, O_RDONLY);
+	if (cub->fd == -1)
 		exit_error(cub, "Can't open file");
-	line = get_next_line(fd);
-	while (line)
+	cub->line = get_next_line(cub->fd);
+	while (cub->line)
 	{
 		n++;
 		if (!cub->texture_n.data || !cub->texture_s.data || !cub->texture_w.data
 			|| !cub->texture_e.data || cub->floor.r == -1
 			|| cub->ceiling.r == -1)
-			handle_element(cub, line);
+			handle_element(cub, cub->line);
 		else
-			save_map(cub, file, line, n);
-		free(line);
-		line = get_next_line(fd);
+			save_map(cub, file, cub->line, n);
+		free(cub->line);
+		cub->line = get_next_line(cub->fd);
 	}
-	cub->map[cub->map_height] = NULL;
-	close(fd);
+	close(cub->fd);
 	init_door(cub);
 	check_elements(cub);
+	cub->map[cub->map_height] = NULL;
 }
 
 void	handle_element(t_cub *cub, char *line)
 {
 	char	*tmp;
 
+	line[ft_strlen(line) - 1] = '\0';
 	if (line_is_empty(cub, line))
 		return ;
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
@@ -97,9 +96,8 @@ void	handle_texture(t_cub *cub, char *line)
 		img = &cub->texture_e;
 	else
 		exit_error(cub, "Duplicate texture");
-	if (ft_strncmp(line + ft_strlen(line) - 5, ".xpm", 4))
+	if (ft_strncmp(line + ft_strlen(line) - 4, ".xpm", 4))
 		exit_error(cub, "Not .xpm extension file");
-	line[ft_strlen(line) - 1] = '\0';
 	img->data = mlx_xpm_file_to_image(cub->mlx, line + 3, &img->width,
 			&img->height);
 	if (!img->data)
@@ -122,7 +120,6 @@ void	check_elements(t_cub *cub)
 	handle_map(cub);
 	print_cub(cub);
 }
-//ft_printf("check elements: SUCCESS\n");
 
 void	handle_colors(t_cub *cub, t_color *rgb, char *line)
 {
@@ -131,8 +128,12 @@ void	handle_colors(t_cub *cub, t_color *rgb, char *line)
 	tmp = ft_split(line + 2, ',');
 	if (!tmp)
 		exit_error(cub, "Malloc failed");
-	if (!(tmp[0] && tmp[1] && tmp[2]) || tmp[3])
-		exit_error(cub, "Needs exactly 3 rgb colors");
+	if (!(tmp[0] && tmp[1] && tmp[2]) || tmp[3]
+		|| !(isnumeric(tmp[0]) && isnumeric(tmp[1]) && isnumeric(tmp[2])))
+	{
+		ft_free_double_tab(&tmp);
+		exit_error(cub, "Wrong color format");
+	}
 	rgb->r = ft_atoi(tmp[0]);
 	rgb->g = ft_atoi(tmp[1]);
 	rgb->b = ft_atoi(tmp[2]);

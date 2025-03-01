@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_loop.c                                        :+:      :+:    :+:   */
+/*   draw_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:25:12 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 09:42:28 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:43:03 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	put_to_window(t_cub *cub)
 {
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.data, 0, 0);
 	if (cub->map_show)
-		mlx_put_image_to_window(cub->mlx, cub->win, cub->mini_map.data, 0, HEIGHT
-		- MAP_HEIGHT);
+		mlx_put_image_to_window(cub->mlx, cub->win, cub->mini_map.data, 0,
+			HEIGHT - MAP_HEIGHT);
 	if (cub->tex_show)
-			show_texture(cub);
+		show_texture(cub);
 }
 
 /*on actualise la position et direction du player

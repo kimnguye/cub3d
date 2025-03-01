@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:54:51 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 10:54:43 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:23:50 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 //WINDOW
 # define WIDTH 800//1920
 # define HEIGHT 600//1080
-# define WALL_SIZ 32
+# define WALL_SIZ 40
 # define MARGIN 5
 
 //MINI MAP
@@ -40,7 +40,7 @@
 # define FIX_MAP_Y 80
 
 //PLAYER
-# define SPEED 0.8
+# define SPEED 2
 # define ROT_SPEED 0.026179939
 # define PLAYER_SIZ 3
 
