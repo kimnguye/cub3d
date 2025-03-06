@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:25:12 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/27 18:43:03 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:19:12 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,29 @@ on clear les images
 on raycaste, et on draw le player et la map*/
 int	draw_loop(t_cub *cub)
 {
-	float	start_x;
+	double	ray_angle;
 	int		x;
 
 	move_player(&cub->player, cub);
 	clear_image(&cub->img, HEIGHT, WIDTH);
 	clear_image(&cub->mini_map, MAP_HEIGHT, MAP_WIDTH);
 	background(cub);
-	draw_map(cub);
-	start_x = cub->player.angle - FOV / 2;
+	ray_angle = cub->player.angle - FOV / 2;
 	x = 0;
 	while (x < WIDTH)
 	{
-		calc_side(cub, start_x, x);
-		wall_texture(cub, start_x, x);
+		init_ray(&cub->ray, cub, ray_angle);
+		calc_side(cub, ray_angle, x);
+		wall_texture(cub, ray_angle, x);
 		draw_wall(cub, cub->wall_texture, x);
-		start_x += cub->fraction;
+		ray_angle += cub->fraction;
 		x++;
 	}
+	show_sprite(cub);
+	draw_map(cub);
 	put_to_window(cub);
+	cub->sprite.num++;
+	if (cub->sprite.num == 8)
+		cub->sprite.num = 0;
 	return (0);
 }

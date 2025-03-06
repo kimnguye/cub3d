@@ -6,7 +6,7 @@
 #    By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 20:46:06 by codespace         #+#    #+#              #
-#    Updated: 2025/02/25 11:40:24 by kimnguye         ###   ########.fr        #
+#    Updated: 2025/03/06 19:17:29 by kimnguye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ C_FILES     =   srcs/main.c \
 				srcs/check_map.c \
 				srcs/free.c \
 				srcs/utils.c \
-				srcs/print.c \
+				srcs/utils2.c \
 				srcs/init.c \
 				srcs/background.c \
 				srcs/pixel_utils.c \
@@ -48,35 +48,36 @@ C_FILES     =   srcs/main.c \
 				srcs/textures.c \
 				srcs/draw_loop.c \
 
-C_BONUS		=	bonus/main_bonus.c \
-				bonus/parsing_bonus.c \
-				bonus/save_map_bonus.c \
+C_BONUS		=	srcs/main.c \
+				srcs/parsing.c \
+				srcs/save_map.c \
+				srcs/utils.c \
+				srcs/init.c \
+				srcs/calc_utils.c \
+				srcs/background.c \
+				srcs/pixel_utils.c \
+				srcs/free.c \
+				srcs/textures.c \
+				bonus/draw_loop_bonus.c \
 				bonus/check_map_bonus.c \
-				bonus/free_bonus.c \
-				bonus/utils_bonus.c \
-				bonus/print_bonus.c \
-				bonus/init_bonus.c \
-				bonus/background_bonus.c \
-				bonus/pixel_utils_bonus.c \
 				bonus/ray_bonus.c \
 				bonus/events_bonus.c \
 				bonus/map_bonus.c \
 				bonus/move_player_bonus.c \
-				bonus/calc_utils_bonus.c \
-				bonus/textures_bonus.c \
-				bonus/draw_loop_bonus.c \
 				bonus/door_bonus.c \
+				bonus/sprite_bonus.c \
+				bonus/sprite_utils.c \
 
 OBJS	=		$(C_FILES:%.c=obj/%.o)
 
 OBJS_BONUS	=	$(C_BONUS:%.c=obj/%.o)
 
-all:			update $(NAME)
+all:		$(NAME)
 
 update:
 	@git submodule update --init --recursive
 
-bonus:	$(LIBFT_LIB) $(H_FILES) $(OBJS_BONUS)
+bonus:		$(LIBFT_LIB) $(H_FILES) $(OBJS_BONUS)
 	@$(MLX_MAKE)
 	@$(CC) $(OBJS_BONUS) $(FLAG) $(FLAG_MLX) $(LIBFT_LIB) -o $(NAME)_bonus
 	@echo "\033[1;32m""🎉 compilation of $(NAME)_bonus: ""SUCCESS !🎉""\033[0m"
@@ -84,7 +85,7 @@ bonus:	$(LIBFT_LIB) $(H_FILES) $(OBJS_BONUS)
 $(LIBFT_LIB):
 	make -C $(LIBFT_PATH)
 
-$(NAME):    $(LIBFT_LIB) $(H_FILES) $(OBJS)
+$(NAME):	$(LIBFT_LIB) $(H_FILES) $(OBJS)
 	@$(MLX_MAKE)
 	@$(CC) $(OBJS) $(FLAG) $(FLAG_MLX) $(LIBFT_LIB) -o $(NAME)
 	@echo "\033[1;32m""🎉 compilation of $(NAME): ""SUCCESS !🎉""\033[0m"

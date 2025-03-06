@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:24:02 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 10:12:37 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:41:08 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ void	init_two(t_cub *cub)
 	cub->texture_s.data = NULL;
 	cub->texture_w.data = NULL;
 	cub->texture_e.data = NULL;
+	cub->door.data = NULL;
 	cub->fraction = FOV / WIDTH;
-	cub->i = 0;
-	cub->j = 0;
 }
 
 void	init_player(t_cub *cub)
@@ -86,4 +85,15 @@ void	init_player(t_cub *cub)
 	cub->player.key_left = false;
 	cub->player.left_rotate = false;
 	cub->player.right_rotate = false;
+}
+
+void	init_ray(t_ray *ray, t_cub *cub, double angle)
+{
+	ray->x = cub->player.x + PLAYER_SIZ / 2;
+	ray->y = cub->player.y + PLAYER_SIZ / 2;
+	ray->dir_x = cos(angle);
+	ray->dir_y = sin(angle);
+	ray->deltadist_x = fabs(BLOCK / ray->dir_x);
+	ray->deltadist_y = fabs(BLOCK / ray->dir_y);
+	calc_ray(ray, &cub->player);
 }

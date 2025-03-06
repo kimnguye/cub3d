@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wscherre <wscherre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:52 by a                 #+#    #+#             */
-/*   Updated: 2025/02/27 18:48:04 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/02/28 23:23:05 by wscherre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	init_player(&cub);
 	parsing(&cub, argv[1]);
 	init_mlx(&cub);
-	print_mlx(&cub);
 	mlx_hook(cub.win, KEYPRESS_EVENT, 1L << 0, key_press, &cub);
 	mlx_hook(cub.win, 3, 1L << 1, key_release, &cub.player);
 	mlx_hook(cub.win, 17, 1L << 17, close_all, &cub);

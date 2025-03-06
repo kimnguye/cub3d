@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: a <a@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:19:24 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/25 22:22:53 by a                ###   ########.fr       */
+/*   Updated: 2025/03/06 18:43:18 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 	int	i;
 
 	i = 0;
-	while (i < BLOCK && x + i < MAP_WIDTH && y
-		+ i < MAP_HEIGHT)
+	while (i < BLOCK)
 	{
 		put_pixel(&cub->mini_map, x + i, y, color);
 		put_pixel(&cub->mini_map, x, y + i, color);
@@ -55,6 +54,25 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 	}
 }
 
+void	full_square(t_cub *cub, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < BLOCK)
+	{
+		i = 0;
+		while (i < BLOCK)
+		{
+			put_pixel(&cub->mini_map, x + i, y + j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+/*BONUS: DOOR*/
 void	draw_map(t_cub *cub)
 {
 	int	j;
@@ -66,15 +84,15 @@ void	draw_map(t_cub *cub)
 	y0 = cub->player.y0;
 	draw_player(&cub->mini_map, cub->player.x - x0, cub->player.y - y0, GREEN);
 	i = y0 / BLOCK;
-	while (cub->map[i])
+	while (i < cub->map_height)
 	{
 		j = x0 / BLOCK;
-		while (cub->map[i][j])
+		while (j < cub->map_width[i])
 		{
 			if (cub->map[i][j] == '1')
-			{
 				draw_square(cub, (j * BLOCK - x0), (i * BLOCK - y0), BLUE);
-			}
+			else if (cub->map[i][j] == 'D')
+				full_square(cub, (j * BLOCK - x0), (i * BLOCK - y0), GREY);
 			j++;
 		}
 		i++;

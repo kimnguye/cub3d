@@ -6,20 +6,20 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/27 18:42:24 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:14:19 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	open_door(char **map, t_player player)
+void	door_action(char **map, t_player player)
 {
 	float	x;
 	float	y;
 	int		i;
 
 	i = 0;
-	while (i < 20)
+	while (i < MARGIN_DOOR)
 	{
 		x = player.x + cos(player.angle) * SPEED * i;
 		y = player.y + sin(player.angle) * SPEED * i;
@@ -85,7 +85,7 @@ int	is_door_forward(char **map, t_player player)
 	int		i;
 
 	i = 0;
-	while (i < 20)
+	while (i < MARGIN_DOOR)
 	{
 		x = player.x + cos(player.angle) * SPEED * i;
 		y = player.y + sin(player.angle) * SPEED * i;
@@ -106,7 +106,7 @@ void	init_door(t_cub *cub)
 	img->data = mlx_xpm_file_to_image(cub->mlx,
 			"./textures/door2.xpm", &img->width, &img->height);
 	if (!img->data)
-		exit_error(cub, "Failed XPM to image");
+		exit_error(cub, "DOOR: Failed XPM to image");
 	img->addr = mlx_get_data_addr(img->data, &img->bpp, &img->size_line,
 			&img->endian);
 	if (!img->addr)

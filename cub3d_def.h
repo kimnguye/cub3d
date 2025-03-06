@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:54:51 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/02/27 19:23:50 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:20:46 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 // PI
 # define PI 3.14159265359
 
-//default values
-# define UNSET_DOUBLE 9999
-
 //WINDOW
-# define WIDTH 800//1920
-# define HEIGHT 600//1080
-# define WALL_SIZ 40
-# define MARGIN 5
+# define WIDTH 1000
+# define HEIGHT 750
+# define WALL_SIZ 32
+# define MARGIN 2
+# define MARGIN_DOOR 7
+# define SPRITE_SIZ 6
 
 //MINI MAP
 # define BLOCK 16
@@ -40,13 +39,14 @@
 # define FIX_MAP_Y 80
 
 //PLAYER
-# define SPEED 2
-# define ROT_SPEED 0.026179939
+# define SPEED 4
+# define ROT_SPEED 0.1
 # define PLAYER_SIZ 3
 
 //CAMERA
 # define FOV 1.047197551
 # define DEFAULT_COLOR YELLOW
+# define STEP 0.02
 
 /*
 //MINI MAP
@@ -86,10 +86,11 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+# define LIGHT_BLUE 0x3BB2FA
 # define MAGENTA 0xFF00FF
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-# define LIGHT_KAKI 0xA9C994
+# define GREY 0xDDDDDD
 
 //keyboard
 # define W 119

@@ -6,7 +6,7 @@
 #    By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 16:02:38 by wscherre          #+#    #+#              #
-#    Updated: 2025/02/27 10:57:36 by kimnguye         ###   ########.fr        #
+#    Updated: 2025/03/03 15:21:15 by kimnguye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS	=	ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 			ft_strncpy.c ft_strcpy.c\
 			ft_strndup.c \
 			ft_isnumericlli.c \
+			ft_ignore_space.c \
 
 OBJS    =   $(SRCS:%.c=obj/%.o)
 

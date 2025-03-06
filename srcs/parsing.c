@@ -6,31 +6,11 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 02:15:48 by a                 #+#    #+#             */
-/*   Updated: 2025/02/27 19:03:15 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:17:46 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-/*si ligne vide et que la carte existe:
-erreur (on naccepte pas les sauts de ligne)
-si ligne vide et carte n'existe pas: ne rien faire*/
-
-/* A valid map / config file obeys the following rules:
-The map must be composed of only 6 possible characters: 0 for an empty space,
-1 for a wall, and N,S,E or W for the player's start position and spawning
-orientation.
-The map must be closed/surrounded by walls
-Except for the map content,
-	each type of element can be separated by one or more empty line(s).
-Except for the map content which always has to be the last,
-	each type of element can be set in any order in the file.
-Except for the map, each type of information from an element can be separated
-by one or more	space(s).
-The map must be parsed as it looks in the file. Spaces are a valid part of the
-map and are up to you to handle. You must be able to parse any kind of map,
-as long as it respects the rules of the map.
- */
 
 void	parsing(t_cub *cub, char *file)
 {
@@ -47,7 +27,10 @@ void	parsing(t_cub *cub, char *file)
 		if (!cub->texture_n.data || !cub->texture_s.data || !cub->texture_w.data
 			|| !cub->texture_e.data || cub->floor.r == -1
 			|| cub->ceiling.r == -1)
+		{
+			cub->line = ft_ignore_spaces(cub->line);
 			handle_element(cub, cub->line);
+		}
 		else
 			save_map(cub, file, cub->line, n);
 		free(cub->line);
@@ -55,14 +38,12 @@ void	parsing(t_cub *cub, char *file)
 	}
 	close(cub->fd);
 	check_elements(cub);
-	cub->map[cub->map_height] = NULL;
 }
 
 void	handle_element(t_cub *cub, char *line)
 {
 	char	*tmp;
 
-	line[ft_strlen(line) - 1] = '\0';
 	if (line_is_empty(cub, line))
 		return ;
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
@@ -97,6 +78,8 @@ void	handle_texture(t_cub *cub, char *line)
 		exit_error(cub, "Duplicate texture");
 	if (ft_strncmp(line + ft_strlen(line) - 4, ".xpm", 4))
 		exit_error(cub, "Not .xpm extension file");
+	while (is_space(*(line + 3)))
+		line++;
 	img->data = mlx_xpm_file_to_image(cub->mlx, line + 3, &img->width,
 			&img->height);
 	if (!img->data)
@@ -117,13 +100,14 @@ void	check_elements(t_cub *cub)
 	if (!cub->map)
 		exit_error(cub, "No map in the file");
 	handle_map(cub);
-	print_cub(cub);
 }
 
 void	handle_colors(t_cub *cub, t_color *rgb, char *line)
 {
 	char	**tmp;
 
+	if (coma_ctr(line) != 2)
+		exit_error(cub, "Wrong color format: expect (R,G,B) in range [0, 255]");
 	tmp = ft_split(line + 2, ',');
 	if (!tmp)
 		exit_error(cub, "Malloc failed");

@@ -6,12 +6,27 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:44:35 by a                 #+#    #+#             */
-/*   Updated: 2025/02/18 14:06:48 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:21:15 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
+
+int	coma_ctr(char *str)
+{
+	int	ctr;
+
+	ctr = 0;
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		if (*str == ',')
+			ctr++;
+		str++;
+	}
+	return (ctr);
+}
 
 void	clear_image(t_img *img, int height, int width)
 {

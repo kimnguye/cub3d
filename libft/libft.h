@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 16:02:51 by wscherre          #+#    #+#             */
-/*   Updated: 2025/02/27 10:57:56 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:24:29 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
+char				*ft_ignore_spaces(char *str);
 int					islli(const char *str);
 int					isnumeric(const char *str);
 int					isnumericlli(const char *str);
