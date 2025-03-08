@@ -6,7 +6,7 @@
 #    By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 20:46:06 by codespace         #+#    #+#              #
-#    Updated: 2025/03/06 19:17:29 by kimnguye         ###   ########.fr        #
+#    Updated: 2025/03/08 20:00:54 by kimnguye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,8 @@ C_BONUS		=	srcs/main.c \
 				srcs/calc_utils.c \
 				srcs/background.c \
 				srcs/pixel_utils.c \
-				srcs/free.c \
 				srcs/textures.c \
+				bonus/free_bonus.c \
 				bonus/draw_loop_bonus.c \
 				bonus/check_map_bonus.c \
 				bonus/ray_bonus.c \
