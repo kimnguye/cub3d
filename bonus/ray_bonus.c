@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:33 by a                 #+#    #+#             */
-/*   Updated: 2025/03/08 18:37:14 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:53:09 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	calc_side(t_cub *cub, int x)
 {
 	while (1)
 	{
+		if (x % (WIDTH / 10) == 0)
+			put_pixel(&cub->mini_map, cub->ray.x - cub->player.x0,
+				cub->ray.y - cub->player.y0, RED);
 		if (cub->ray.sidedist_x < cub->ray.sidedist_y)
 		{
 			cub->ray.sidedist_x += cub->ray.deltadist_x;

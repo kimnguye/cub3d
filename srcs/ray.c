@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 19:30:33 by a                 #+#    #+#             */
-/*   Updated: 2025/03/06 14:18:36 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:44:07 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	touch(t_cub *cub, float px, float py)
 
 /*update ray.x and ray.y until it hits a wall
 new method: with step 1*/
-void	calc_side(t_cub *cub, double angle, int x)
+void	calc_side(t_cub *cub, int x)
 {
 	while (1)
 	{

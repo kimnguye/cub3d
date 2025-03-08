@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 18:36:27 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:36:37 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,24 @@ bool	touch_sprite(t_cub *cub, float px, float py)
 
 /*update ray.x and ray.y until it hits a wall
 new method: with step 1*/
-void	calc_short_dist(t_cub *cub, t_ray *ray)
-{
-	while (1)
-	{
-		if (ray->sidedist_x < ray->sidedist_y)
-		{
-			ray->sidedist_x += ray->deltadist_x;
-			ray->x += ray->step_x;
-		}
-		else
-		{
-			ray->sidedist_y += ray->deltadist_y;
-			ray->y += ray->step_y;
-		}
-		if (touch_sprite(cub, ray->x, ray->y))
-			break ;
-	}
-}
+// void	calc_short_dist(t_cub *cub, t_ray *ray)
+// {
+// 	while (1)
+// 	{
+// 		if (ray->sidedist_x < ray->sidedist_y)
+// 		{
+// 			ray->sidedist_x += ray->deltadist_x;
+// 			ray->x += ray->step_x;
+// 		}
+// 		else
+// 		{
+// 			ray->sidedist_y += ray->deltadist_y;
+// 			ray->y += ray->step_y;
+// 		}
+// 		if (touch_sprite(cub, ray->x, ray->y))
+// 			break ;
+// 	}
+// }
 
 /*update ray.x and ray.y until it hits a wall
 new method: with step 1*/
@@ -61,9 +61,6 @@ void	calc_side_sprite(t_cub *cub, int x)
 {
 	while (1)
 	{
-		if (x % (WIDTH / 10) == 0)
-			put_pixel(&cub->mini_map, cub->ray.x - cub->player.x0,
-				cub->ray.y - cub->player.y0, RED);
 		if (cub->ray.sidedist_x < cub->ray.sidedist_y)
 		{
 			cub->ray.sidedist_x += cub->ray.deltadist_x;
@@ -79,9 +76,6 @@ void	calc_side_sprite(t_cub *cub, int x)
 		if (touch_sprite(cub, cub->ray.x, cub->ray.y))
 			break ;
 	}
-	/*corriger le fait que le sprite est au milieu du bloc et pas des quon touche le bloc*/
-	cub->ray.x + BLOCK * 0.5;
-	cub->ray.y + BLOCK * 0.5;
 }
 
 void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
@@ -90,25 +84,30 @@ void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 	double	step;
 	float	height;
 	int		color;
+	int		end;
 
 	if (cub->sprite.hit == true)
 	{
-		height = (SPRITE_SIZ / fixed_dist(cub->player, cub->player.ray.x,
-					cub->player.ray.y)) * (WIDTH / 2);
+		height = (SPRITE_SIZ / fixed_dist(cub->player, cub->ray.x,
+			cub->ray.y)) * (WIDTH / 2);
 		start_y = (HEIGHT + height) / 2;
 		step = cub->sprite.height / height;
 		sprite_param(&cub->sprite);
 		cub->ty = 0;
+		cub->side = 0;
 		cub->tx = tex_x(cub, tex_spr) % cub->sprite.width + cub->sprite.add_w;
-		while (start_y < (HEIGHT + height) / 2 + height)
+		end = min(HEIGHT, (HEIGHT + height) / 2 + (int)height);
+		printf("debut sprite y = %i, fin = %i\n, step= %f", start_y, end, step);
+		while (start_y < end)
 		{
-			cub->ty = (int)cub->ty % cub->sprite.height + cub->sprite.add_h;
-			color = get_pixel(tex_spr, cub->tx, cub->ty);
+			cub->ty = cub->ty + cub->sprite.add_h;
+			color = get_pixel(tex_spr, cub->tx, (int)cub->ty);
 			if (color != WHITE && color != GREY)
 				put_pixel(&cub->img, x, start_y, color);
 			cub->ty += step;
 			start_y++;
 		}
+		printf("TY = %f\n", cub->ty);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 18:24:08 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:52:12 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	sprite_param(t_sprite *sprite)
 }
 
 /*calcul en fonction de langle du player (sa direction)*/
-void	init_ray_player(t_cub *cub, t_ray *ray, t_player *player)
-{
-	ray->x = player->x + PLAYER_SIZ / 2;
-	ray->y = player->y + PLAYER_SIZ / 2;
-	ray->dir_x = cos(player->angle);
-	ray->dir_y = sin(player->angle);
-	ray->deltadist_x = fabs(BLOCK / ray->dir_x);
-	ray->deltadist_y = fabs(BLOCK / ray->dir_y);
-	calc_ray(ray, player);
-	calc_short_dist(cub, ray);
-}
+// void	init_ray_player(t_cub *cub, t_ray *ray, t_player *player)
+// {
+// 	ray->x = player->x + PLAYER_SIZ / 2;
+// 	ray->y = player->y + PLAYER_SIZ / 2;
+// 	ray->dir_x = cos(player->angle);
+// 	ray->dir_y = sin(player->angle);
+// 	ray->deltadist_x = fabs(BLOCK / ray->dir_x);
+// 	ray->deltadist_y = fabs(BLOCK / ray->dir_y);
+// 	calc_ray(ray, player);
+// 	calc_short_dist(cub, ray);
+// }
 
 int	is_sprite_forward(char **map, double x, double y)
 {

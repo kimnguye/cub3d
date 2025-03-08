@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:25 by a                 #+#    #+#             */
-/*   Updated: 2025/03/08 18:36:54 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:30:06 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_player
 	bool		key_right;
 	bool		left_rotate;
 	bool		right_rotate;
-	t_ray		ray;
 }				t_player;
 
 typedef struct s_sprite
@@ -107,7 +106,7 @@ typedef struct s_cub
 	t_player	player;
 	t_ray		ray;
 	int			tx;
-	int			ty;
+	double		ty;
 	t_sprite	sprite;
 	int			side;
 	float		fraction;
@@ -170,6 +169,7 @@ int				is_space(char c);
 int				is_in(char c, char *str);
 int				line_is_empty(t_cub *cub, char *line);
 int				max(int a, int b);
+int				min(int a, int b);
 int				coma_ctr(char *str);
 
 // background
@@ -189,4 +189,5 @@ void			sprite_param(t_sprite *sprite);
 void			show_sprite(t_cub *cub);
 void			draw_sprite(t_cub *cub, t_img *tex_spr, int x);
 void			calc_side_sprite(t_cub *cub, int x);
+void			calc_short_dist(t_cub *cub, t_ray *ray);
 #endif

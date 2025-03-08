@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:19:24 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/06 18:43:18 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:21:08 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 int	max(int a, int b)
 {
 	if (a > b)
+		return (a);
+	return (b);
+}
+int	min(int a, int b)
+{
+	if (a < b)
 		return (a);
 	return (b);
 }
