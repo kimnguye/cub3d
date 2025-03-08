@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 18:26:46 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:36:27 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@ void	calc_short_dist(t_cub *cub, t_ray *ray)
 
 /*update ray.x and ray.y until it hits a wall
 new method: with step 1*/
-void	calc_side_sprite(t_cub *cub, double angle, int x)
+void	calc_side_sprite(t_cub *cub, int x)
 {
 	while (1)
 	{
+		if (x % (WIDTH / 10) == 0)
+			put_pixel(&cub->mini_map, cub->ray.x - cub->player.x0,
+				cub->ray.y - cub->player.y0, RED);
 		if (cub->ray.sidedist_x < cub->ray.sidedist_y)
 		{
 			cub->ray.sidedist_x += cub->ray.deltadist_x;
@@ -76,6 +79,9 @@ void	calc_side_sprite(t_cub *cub, double angle, int x)
 		if (touch_sprite(cub, cub->ray.x, cub->ray.y))
 			break ;
 	}
+	/*corriger le fait que le sprite est au milieu du bloc et pas des quon touche le bloc*/
+	cub->ray.x + BLOCK * 0.5;
+	cub->ray.y + BLOCK * 0.5;
 }
 
 void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
@@ -116,7 +122,7 @@ void	show_sprite(t_cub *cub)
 	while (x < WIDTH)
 	{
 		init_ray(&cub->ray, cub, ray_angle);
-		calc_side_sprite(cub, ray_angle, x);
+		calc_side_sprite(cub, x);
 		draw_sprite(cub, &cub->texture_sprite, x);
 		ray_angle += cub->fraction;
 		x++;
