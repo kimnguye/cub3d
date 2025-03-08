@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:25 by a                 #+#    #+#             */
-/*   Updated: 2025/03/08 19:30:06 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:38:33 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,8 @@ int				is_door_closed(char **map, float x, float y);
 
 //sprite
 void			init_sprite(t_cub *cub);
-int				is_sprite_forward(char **map, double x, double y);
-void			init_ray_player(t_cub *cub, t_ray *ray, t_player *player);
 void			sprite_param(t_sprite *sprite);
 void			show_sprite(t_cub *cub);
 void			draw_sprite(t_cub *cub, t_img *tex_spr, int x);
 void			calc_side_sprite(t_cub *cub, int x);
-void			calc_short_dist(t_cub *cub, t_ray *ray);
 #endif

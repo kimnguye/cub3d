@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 19:36:37 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:53:36 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ void	calc_side_sprite(t_cub *cub, int x)
 			break ;
 	}
 }
+/*calculate the position X hit by the ray on the texture*/
+int	spr_x(t_cub *cub, t_img *texture)
+{
+	double	wall_x;
+
+	if (cub->side == 0)
+		wall_x = cub->ray.x / SPRITE_SIZ;
+	else
+		wall_x = cub->ray.y / SPRITE_SIZ;
+	wall_x -= floor((wall_x));
+	return ((int)(wall_x * (double)(texture->width)));
+}
 
 void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 {
@@ -90,24 +102,22 @@ void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 	{
 		height = (SPRITE_SIZ / fixed_dist(cub->player, cub->ray.x,
 			cub->ray.y)) * (WIDTH / 2);
-		start_y = (HEIGHT + height) / 2;
-		step = cub->sprite.height / height;
+		start_y = (HEIGHT - height) / 2;
+		step = (cub->sprite.height - 1)/ height;
 		sprite_param(&cub->sprite);
-		cub->ty = 0;
+		cub->ty = 0 + cub->sprite.add_h;
 		cub->side = 0;
-		cub->tx = tex_x(cub, tex_spr) % cub->sprite.width + cub->sprite.add_w;
-		end = min(HEIGHT, (HEIGHT + height) / 2 + (int)height);
-		printf("debut sprite y = %i, fin = %i\n, step= %f", start_y, end, step);
+		cub->tx = spr_x(cub, tex_spr) % cub->sprite.width + cub->sprite.add_w;
+		end = min(HEIGHT, (HEIGHT - height) / 2 + (int)height);
 		while (start_y < end)
 		{
-			cub->ty = cub->ty + cub->sprite.add_h;
+			cub->ty = cub->ty;
 			color = get_pixel(tex_spr, cub->tx, (int)cub->ty);
 			if (color != WHITE && color != GREY)
 				put_pixel(&cub->img, x, start_y, color);
 			cub->ty += step;
 			start_y++;
 		}
-		printf("TY = %f\n", cub->ty);
 	}
 }
 

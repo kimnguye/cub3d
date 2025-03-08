@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:54:51 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/06 19:29:27 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:49:30 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WALL_SIZ 32
 # define MARGIN 2
 # define MARGIN_DOOR 7
-# define SPRITE_SIZ 32
+# define SPRITE_SIZ 64
 
 //MINI MAP
 # define BLOCK 16

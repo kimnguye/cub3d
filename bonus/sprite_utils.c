@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 18:52:12 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:45:34 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ void	sprite_param(t_sprite *sprite)
 // 	calc_ray(ray, player);
 // 	calc_short_dist(cub, ray);
 // }
-
-int	is_sprite_forward(char **map, double x, double y)
-{
-	int		i;
-
-	i = 0;
-	while (i < MARGIN_DOOR)
-	{
-		if (map[(int)y / BLOCK][(int)x / BLOCK] == 'P')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	init_sprite(t_cub *cub)
 {
