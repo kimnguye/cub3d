@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/06 18:49:00 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:12:10 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 {
 	int		start_y;
 	double	step;
-	double	tex_y;
 	float	height;
 	int		color;
 
@@ -91,16 +90,16 @@ void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 					cub->player.ray.y)) * (WIDTH / 2);
 		start_y = (HEIGHT + height) / 2;
 		step = cub->sprite.height / height;
-		tex_y = 0;
+		cub->ty = 0;
+		cub->tx = 0;
 		sprite_param(&cub->sprite);
 		while (start_y < (HEIGHT + height) / 2 + height)
 		{
-			tex_y = (int)tex_y % cub->sprite.height + cub->sprite.add_h;
-			color = get_pixel(tex_spr, tex_x(cub, tex_spr) % cub->sprite.width
-					+ cub->sprite.add_w, tex_y);
+			cub->ty = (int)cub->ty % cub->sprite.height + cub->sprite.add_h;
+			color = get_pixel(tex_spr, tex_x(cub, tex_spr) % cub->sprite.width + cub->sprite.add_w, cub->ty);
 			if (color != WHITE && color != GREY)
 				put_pixel(&cub->img, x, start_y, color);
-			tex_y += step;
+			cub->ty += step;
 			start_y++;
 		}
 	}

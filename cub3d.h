@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:25 by a                 #+#    #+#             */
-/*   Updated: 2025/03/06 19:13:21 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:09:18 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_cub
 	t_img		*wall_texture;
 	t_player	player;
 	t_ray		ray;
+	int			tx;
+	int			ty;
 	t_sprite	sprite;
 	int			side;
 	float		fraction;
