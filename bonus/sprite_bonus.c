@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/08 18:14:19 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:26:46 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ bool	touch_sprite(t_cub *cub, float px, float py)
 
 	x = px / BLOCK;
 	y = py / BLOCK;
+	cub->sprite.hit = false;
 	if (cub->map[y] && cub->map[y][x] && cub->map[y][x] == 'P')
+	{
+		cub->sprite.hit = true;
 		return (true);
+	}
 	if (cub->map[y] && cub->map[y][x] && cub->map[y][x] == '1')
 		return (true);
 	if (cub->map[y] && cub->map[y][x] && cub->map[y][x] == 'D')
@@ -57,9 +61,6 @@ void	calc_side_sprite(t_cub *cub, double angle, int x)
 {
 	while (1)
 	{
-		if (x % (WIDTH / 10) == 0)
-			put_pixel(&cub->mini_map, cub->ray.x - cub->player.x0,
-				cub->ray.y - cub->player.y0, RED);
 		if (cub->ray.sidedist_x < cub->ray.sidedist_y)
 		{
 			cub->ray.sidedist_x += cub->ray.deltadist_x;
@@ -84,7 +85,7 @@ void	draw_sprite(t_cub *cub, t_img *tex_spr, int x)
 	float	height;
 	int		color;
 
-	if (cub->map[(int)cub->ray.y / BLOCK][(int)cub->ray.x / BLOCK] == 'P')
+	if (cub->sprite.hit == true)
 	{
 		height = (SPRITE_SIZ / fixed_dist(cub->player, cub->player.ray.x,
 					cub->player.ray.y)) * (WIDTH / 2);

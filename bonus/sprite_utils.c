@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:57:53 by kimnguye          #+#    #+#             */
-/*   Updated: 2025/03/06 19:27:10 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:24:08 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	sprite_param(t_sprite *sprite)
 	sprite->add_w = sprite->num % 4 * sprite->width;
 }
 
+/*calcul en fonction de langle du player (sa direction)*/
 void	init_ray_player(t_cub *cub, t_ray *ray, t_player *player)
 {
 	ray->x = player->x + PLAYER_SIZ / 2;

@@ -6,7 +6,7 @@
 /*   By: kimnguye <kimnguye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 01:49:25 by a                 #+#    #+#             */
-/*   Updated: 2025/03/08 18:15:04 by kimnguye         ###   ########.fr       */
+/*   Updated: 2025/03/08 18:18:45 by kimnguye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_sprite
 	int			num;
 	int			add_h;
 	int			add_w;
+	bool		hit;
 }				t_sprite;
 
 typedef struct s_cub
