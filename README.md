@@ -1,7 +1,7 @@
 # How to compile
-- make update to download the minilibx
-- make
-- make bonus
+- make update (download the minilibx)
+- make (compile cub3d)
+- make bonus (compile cub3d_bonus)
 
 # How to launch the game
 - ./cub3d maps/...
